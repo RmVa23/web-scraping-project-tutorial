@@ -1,3 +1,6 @@
+# Este código ha sido ejecutado en local tal cual está a continuación, con resultado favorable.
+# A continuación del código, comento los pasos realizados para intentar adaptar y ejecutarlo en el codespace, sin éxito.
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import pandas as pd
@@ -12,9 +15,7 @@ url ='https://coinmarketcap.com/es/currencies/ethereum/historical-data/'
 driver.get(url)
 
 # Esperamos a que la página cargue completamente (se puede ajustar el tiempo según sea necesario)
-driver.implicitly_wait(1000)  # Esperamos hasta 10 segundos
-
-time.sleep(10) # hacemos que espere 10 segundos para que compile bien los datos (hubo problemas al ejecutar el codigo poor el tiepo de carga)
+driver.implicitly_wait(100)  # Esperamos hasta 100 segundos
 
 # Obtenemos el HTML de la página después de que se haya cargado completamente
 html = driver.page_source
@@ -66,7 +67,8 @@ data.to_csv('1-trimestre-2024-ETH.csv', index=False)
 
 # He probado sin resultado favorable las siguientes soluciones para ejecutar este código desde el codespace:
 # - 1. En el Jupyter Notebook use HtmlUnitDriver: Navegador sin cabeza que está integrado directamente en Selenium WebDriver y no requiere la instalación de controladores externos.
-# - 2. Tambien descargue del driver de Firefox (geckodriver) y probe distintas formas, como las siguientes
+# - 2. Tambien descargue del driver de Firefox (geckodriver) y probe distintas formas, como las expuestas a continuación:
+
 
 # from selenium.webdriver import Firefox
 # from selenium.webdriver.firefox.options import Options
@@ -88,8 +90,9 @@ data.to_csv('1-trimestre-2024-ETH.csv', index=False)
 
 # driver = webdriver.Firefox(executable_path=gecko_driver, options=firefox_options)
 
-# También consideré usar Selenium Grid (para ejecutar pruebas automatizadas en una máquina remota
-# sin necesidad de descargar e instalar un controlador específico en tu entorno local). 
+
+# Además, consideré usar Selenium Grid (para ejecutar pruebas automatizadas en una máquina remota
+# sin necesidad de descargar e instalar un controlador específico en el entorno local). 
 # También Sauce Labs (servicio en la nube que ofrece navegadores y ambientes preconfigurados para pruebas automatizadas), y proporciona una API.
 # Seguiré trabajando en encontrar una solución que me permita ejecutar el código, tanto si es una de las mencionadas anteriormente,
 # como si es la descarga de otro driver como el de Chrome.
